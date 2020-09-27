@@ -10,21 +10,12 @@ const itemMenu = menuItem(menuDishes);
 menuList.insertAdjacentHTML('afterbegin', itemMenu);
 
 themeSwitch.addEventListener('change', () => {
-  console.log(themeSwitch.checked);
-  if(themeSwitch.checked) {
-    localStorage.setItem('theme', Theme.DARK);
-    body.classList.toggle(Theme.DARK);
-    body.classList.remove(Theme.LIGHT);
-  } else {
-    localStorage.setItem('theme', Theme.LIGHT);
-    body.classList.toggle(Theme.LIGHT);
-    body.classList.remove(Theme.DARK);
-  } 
+  const theme = themeSwitch.checked ? Theme.DARK : Theme.LIGHT;
+  localStorage.setItem('theme', theme);
+  body.classList.toggle(Theme.DARK);
+  body.classList.toggle(Theme.LIGHT);
 });
 
-if(localStorage.getItem('theme') === Theme.DARK) {
-  themeSwitch.checked = true;
-  body.classList = localStorage.getItem('theme');
-} else {
-  body.classList = localStorage.getItem('theme');
-};
+const localTheme = localStorage.getItem('theme');
+themeSwitch.checked = localTheme === Theme.DARK;
+body.classList = localTheme;
